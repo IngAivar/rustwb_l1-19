@@ -1,29 +1,30 @@
-use std::collections::VecDeque;
+// Функция для переворота фразы из нескольких слов
+fn reverse_string(input: &str) -> String {
+    // Разбиваем входную строку на отдельные слова по пробелам
+    let words: Vec<&str> = input.split(' ').collect();
 
-fn reverse_words(s: &str) -> String {
-    let mut words = VecDeque::new();
-    let mut word = String::new();
+    // Создаем пустую строку для обратной фразы
+    let mut reversed_phrase = String::new();
 
-    for c in s.chars() {
-        if c.is_whitespace() {
-            if !word.is_empty() {
-                words.push_front(word);
-                word.clear();
-            }
-        } else {
-            word.push(c);
-        }
+    // Перебираем слова в обратном порядке
+    for word in words.iter().rev() {
+        // Добавляем текущее слово и пробел после слова
+        reversed_phrase.push_str(word);
+        reversed_phrase.push(' ');
     }
 
-    if !word.is_empty() {
-        words.push_front(word);
-    }
-
-    words.into_iter().collect::<String>()
+    // Возвращаем обратную фразу
+    reversed_phrase
 }
 
 fn main() {
-    let input = "snow dog sun";
-    let output = reverse_words(input);
-    println!("{}", output);
+    // Задаем входную строку
+    let input_string = "snow dog sun";
+
+    // Вызываем функцию для переворота строки
+    let reversed = reverse_string(input_string);
+
+    // Выводим исходную и перевернутую строки
+    println!("Исходная строка: {}", input_string);
+    println!("Перевернутая строка: {}", reversed);
 }
